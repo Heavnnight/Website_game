@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Choose Mood</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial;
+      text-align: center;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+    }
+  </style>
+
+</head>
+<body>
+
+<div>
+  <h2>How do you feel?</h2>
+
+  <button onclick="saveMood('stressed')">Stressed</button>
+  <button onclick="saveMood('bored')">Bored</button>
+  <button onclick="saveMood('excited')">Excited</button>
+</div>
+
+<script>
+function saveMood(mood){
+  localStorage.setItem('mood', mood);
+  window.location.href = 'q1.html';
+}
+</script>
+
+</body>
+</html>

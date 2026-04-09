@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Result</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial;
+      text-align: center;
+    }
+  </style>
+
+</head>
+<body>
+
+<div>
+  <h1>Your Game Type</h1>
+  <p id="result"></p>
+</div>
+
+<script>
+let mood = localStorage.getItem('mood');
+let speed = localStorage.getItem('speed');
+let type = localStorage.getItem('type');
+let play = localStorage.getItem('play');
+let challenge = localStorage.getItem('challenge');
+
+let result = "";
+
+if (mood === "stressed" && speed === "fast") {
+  result = "Shooter / Action games";
+}
+else if (mood === "stressed" && speed === "slow") {
+  result = "Cozy / Relaxing games";
+}
+else if (type === "story") {
+  result = "Story-driven games";
+}
+else if (play === "multi") {
+  result = "Multiplayer games";
+}
+else if (challenge === "yes") {
+  result = "Challenging games";
+}
+else if (mood === "bored") {
+  result = "Sandbox / Fun games";
+}
+else if (mood === "excited") {
+  result = "Fast-paced games";
+}
+else {
+  result = "Adventure games";
+}
+
+document.getElementById("result").innerText = result;
+</script>
+
+</body>
+</html>

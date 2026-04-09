@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Question 4</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial;
+      text-align: center;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+    }
+  </style>
+
+</head>
+<body>
+
+<div>
+  <h2>Do you want a challenge?</h2>
+
+  <button onclick="save('challenge','yes')">Yes</button>
+  <button onclick="save('challenge','no')">No</button>
+</div>
+
+<script>
+function save(key, value){
+  localStorage.setItem(key, value);
+  window.location.href = 'result.html';
+}
+</script>
+
+</body>
+</html>

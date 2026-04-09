@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Question 3</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial;
+      text-align: center;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+    }
+  </style>
+
+</head>
+<body>
+
+<div>
+  <h2>Alone or with others?</h2>
+
+  <button onclick="save('play','alone')">Alone</button>
+  <button onclick="save('play','multi')">With others</button>
+</div>
+
+<script>
+function save(key, value){
+  localStorage.setItem(key, value);
+  window.location.href = 'q4.html';
+}
+</script>
+
+</body>
+</html>
