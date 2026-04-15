@@ -4,61 +4,147 @@
   <title>Result</title>
 
   <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial;
-      text-align: center;
+    @font-face {
+      font-family: myFont;
+      src: url("font.ttf");
+    }
+
+    body{
+      margin:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      background:black;
+      font-family: myFont, sans-serif;
+    }
+
+    .console{
+      position:relative;
+      width:1100px;
+    }
+
+    .bg{
+      width:100%;
+      display:block;
+    }
+
+    .top-screen{
+      position:absolute;
+      top:16%;
+      left:28%;
+      width:44%;
+      height:12%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:white;
+      font-size:28px;
+    }
+
+    .bottom-screen{
+      position:absolute;
+      top:54%;
+      left:30%;
+      width:40%;
+      height:20%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:white;
+      gap:16px;
+      padding:10px;
+      box-sizing:border-box;
+    }
+
+    #gameName{
+      font-size:30px;
+    }
+
+    #gameText{
+      font-size:16px;
+      line-height:1.5;
+      max-width:320px;
+    }
+
+    p{
+      margin:0;
     }
   </style>
-
 </head>
+
 <body>
 
-<div>
-  <h1>Your Game Type</h1>
-  <p id="result"></p>
-</div>
+  <div class="console">
+    <img src="3ds.png" class="bg">
 
-<script>
-let mood = localStorage.getItem('mood');
-let speed = localStorage.getItem('speed');
-let type = localStorage.getItem('type');
-let play = localStorage.getItem('play');
-let challenge = localStorage.getItem('challenge');
+    <div class="top-screen">
+      <p>My recommendation for you</p>
+    </div>
 
-let result = "";
+    <div class="bottom-screen">
+      <div id="gameName"></div>
+      <div id="gameText"></div>
+    </div>
+  </div>
 
-if (mood === "stressed" && speed === "fast") {
-  result = "Shooter / Action games";
-}
-else if (mood === "stressed" && speed === "slow") {
-  result = "Cozy / Relaxing games";
-}
-else if (type === "story") {
-  result = "Story-driven games";
-}
-else if (play === "multi") {
-  result = "Multiplayer games";
-}
-else if (challenge === "yes") {
-  result = "Challenging games";
-}
-else if (mood === "bored") {
-  result = "Sandbox / Fun games";
-}
-else if (mood === "excited") {
-  result = "Fast-paced games";
-}
-else {
-  result = "Adventure games";
-}
+  <script>
+    let mood = localStorage.getItem("mood");
+    let q1 = localStorage.getItem("q1"); // fast / slow
+    let q2 = localStorage.getItem("q2"); // story / action
+    let q3 = localStorage.getItem("q3"); // alone / with-others
+    let q4 = localStorage.getItem("q4"); // yes / no
 
-document.getElementById("result").innerText = result;
-</script>
+    let gameName = "";
+    let gameText = "";
+
+    if (mood === "stressed" && q1 === "slow" && q2 === "story") {
+      gameName = "Spiritfarer";
+      gameText = "A calm emotional game. I like it because it feels soft and comforting when I want something slow.";
+    }
+    else if (mood === "stressed" && q1 === "fast" && q2 === "action") {
+      gameName = "Hades";
+      gameText = "Fast, stylish, and energetic. I like it when I want movement and action without feeling bored.";
+    }
+    else if (mood === "sad" && q2 === "story") {
+      gameName = "Life is Strange";
+      gameText = "A story-driven game about emotions and choices. I like it because it feels personal and emotional.";
+    }
+    else if (mood === "angry" && q1 === "fast") {
+      gameName = "DOOM";
+      gameText = "A fast and intense shooter. I like it when I want something aggressive and energetic.";
+    }
+    else if (mood === "happy" && q3 === "with-others") {
+      gameName = "Mario Kart";
+      gameText = "A fun chaotic racing game. I like it because it feels playful and easy to enjoy with other people.";
+    }
+    else if (mood === "happy" && q3 === "alone") {
+      gameName = "A Short Hike";
+      gameText = "A light and relaxing adventure. I like it because it feels cozy and easy to get into.";
+    }
+    else if (mood === "neutral" && q2 === "story") {
+      gameName = "Night in the Woods";
+      gameText = "A narrative game with a strong mood and characters. I like it when I want story and atmosphere.";
+    }
+    else if (q4 === "yes" && q2 === "action") {
+      gameName = "Hollow Knight";
+      gameText = "A challenging action game. I like it because it feels rewarding and immersive.";
+    }
+    else if (q3 === "with-others") {
+      gameName = "Overwatch 2";
+      gameText = "A multiplayer action game. I like it when I want something active with other people.";
+    }
+    else {
+      gameName = "Stardew Valley";
+      gameText = "A relaxing farming game. I like it because it feels calm, repetitive, and comforting.";
+    }
+
+    document.getElementById("gameName").innerText = gameName;
+    document.getElementById("gameText").innerText = gameText;
+  </script>
 
 </body>
 </html>

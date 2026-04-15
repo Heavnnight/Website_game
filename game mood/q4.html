@@ -4,37 +4,99 @@
   <title>Question 4</title>
 
   <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial;
-      text-align: center;
+    @font-face {
+      font-family: myFont;
+      src: url("font.ttf");
     }
-    button {
-      margin: 10px;
-      padding: 10px 20px;
+
+    body{
+      margin:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      background:black;
+      font-family: myFont, sans-serif;
+    }
+
+    .console{
+      position:relative;
+      width:1100px;
+    }
+
+    .bg{
+      width:100%;
+      display:block;
+    }
+
+    .top-screen{
+      position:absolute;
+      top:18%;
+      left:54%;
+      transform:translateX(-50%);
+      width:40%;
+      height:18%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:60px;
+    }
+
+    .bottom-screen{
+      position:absolute;
+      top:65%;
+      left:37%;
+      width:36%;
+      height:12%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:white;
+      font-size:34px;
+    }
+
+    button{
+      font-family: myFont, sans-serif;
+      font-size:28px;
+      padding:20px 40px;
+      cursor:pointer;
+      border:none;
+      border-radius:18px;
+      transition:0.2s;
+    }
+
+    button:hover{
+      transform:scale(1.1);
+    }
+
+    p{
+      margin:0;
     }
   </style>
-
 </head>
+
 <body>
 
-<div>
-  <h2>Do you want a challenge?</h2>
+  <div class="console">
+    <img src="3ds.png" class="bg">
 
-  <button onclick="save('challenge','yes')">Yes</button>
-  <button onclick="save('challenge','no')">No</button>
-</div>
+    <div class="top-screen">
+      <button onclick="next('yes')">Yes</button>
+      <button onclick="next('no')">No</button>
+    </div>
 
-<script>
-function save(key, value){
-  localStorage.setItem(key, value);
-  window.location.href = 'result.html';
-}
-</script>
+    <div class="bottom-screen">
+      <p>Do you want a challenge?</p>
+    </div>
+  </div>
+
+  <script>
+    function next(answer){
+      localStorage.setItem("q4", answer);
+      window.location.href = "result.html";
+    }
+  </script>
 
 </body>
 </html>

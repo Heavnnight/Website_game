@@ -4,37 +4,105 @@
   <title>Question 1</title>
 
   <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial;
-      text-align: center;
+    @font-face {
+      font-family: myFont;
+      src: url("font.ttf");
     }
-    button {
-      margin: 10px;
-      padding: 10px 20px;
+
+    body{
+      margin:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      background:black;
+      font-family: myFont, sans-serif;
+    }
+
+    .console{
+      position:relative;
+      width:1100px;
+    }
+
+    .bg{
+      width:100%;
+      display:block;
+    }
+
+    /* فوق = الأجوبة */
+    .top-screen{
+      position:absolute;
+      top:18%;
+      left:54%;
+      transform:translateX(-50%);
+      width:38%;
+      height:18%;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:100px;
+    }
+
+    /* تحت = السؤال */
+    .bottom-screen{
+      position:absolute;
+      top:65%;
+      left:40%;
+      width:30%;
+      height:12%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:white;
+      font-size:40px;
+    }
+
+    button{
+      font-family: myFont, sans-serif;
+      font-size:34px;
+      padding:20px 50px;
+      cursor:pointer;
+      border:none;
+      border-radius:18px;
+      transition:0.2s;
+    }
+
+    button:hover{
+      transform:scale(1.1);
+    }
+
+    p{
+      margin:0;
     }
   </style>
-
 </head>
+
 <body>
 
-<div>
-  <h2>Fast or slow?</h2>
+  <div class="console">
+    <img src="3ds.png" class="bg">
 
-  <button onclick="save('speed','fast')">Fast</button>
-  <button onclick="save('speed','slow')">Slow</button>
-</div>
+    <!-- الأجوبة -->
+    <div class="top-screen">
+      <button onclick="next('fast')">Fast</button>
+      <button onclick="next('slow')">Slow</button>
+    </div>
 
-<script>
-function save(key, value){
-  localStorage.setItem(key, value);
-  window.location.href = 'q2.html';
-}
-</script>
+    <!-- السؤال -->
+    <div class="bottom-screen">
+      <p>Do you want to play something fast or slow?</p>
+    </div>
+
+  </div>
+
+  <script>
+    function next(answer){
+      localStorage.setItem("q1", answer);
+      window.location.href = "q2.html";
+    }
+  </script>
 
 </body>
 </html>

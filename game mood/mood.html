@@ -4,38 +4,124 @@
   <title>Choose Mood</title>
 
   <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial;
-      text-align: center;
+    @font-face {
+      font-family: myFont;
+      src: url("font.ttf");
     }
-    button {
-      margin: 10px;
-      padding: 10px 20px;
+
+    body{
+      margin:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      background:black;
+      font-family: myFont, sans-serif;
+    }
+
+    .console{
+      position:relative;
+      width:1100px;
+    }
+
+    .bg{
+      width:100%;
+      display:block;
+    }
+
+    /* مساحة الشاشة العليا */
+    .top-screen{
+      position:absolute;
+      top:15%;
+      left:25%;
+      width:50%;
+      height:24%;
+    }
+
+    /* مساحة الشاشة السفلى */
+    .bottom-screen{
+      position:absolute;
+      top:65%;
+      left:35%;
+      width:40%;
+      height:12%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:white;
+      font-size:45px;
+    }
+
+    .mood{
+      position:absolute;
+      width:100px;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    .mood:hover{
+      transform:scale(1.1);
+    }
+
+    .neutral{
+      top:-20px;
+      left:60%;
+      transform:translateX(-50%);
+    }
+
+    .neutral:hover{
+      transform:translateX(-50%) scale(1.1);
+    }
+
+    .angry{
+      top:30px;
+      left:140px;
+    }
+
+    .sad{
+      top:30px;
+      right:35px;
+    }
+
+    .happy{
+      top:135px;
+      left:220px;
+    }
+
+    .stressed{
+      top:135px;
+      right:100px;
+    }
+
+    p{
+      margin:0;
     }
   </style>
-
 </head>
+
 <body>
+  <div class="console">
+    <img src="3ds.png" class="bg">
 
-<div>
-  <h2>How do you feel?</h2>
+    <div class="top-screen">
+      <img src="Neutral.png" class="mood neutral" onclick="chooseMood('neutral')">
+      <img src="angry.png" class="mood angry" onclick="chooseMood('angry')">
+      <img src="sad.png" class="mood sad" onclick="chooseMood('sad')">
+      <img src="happy.png" class="mood happy" onclick="chooseMood('happy')">
+      <img src="stressed.png" class="mood stressed" onclick="chooseMood('stressed')">
+    </div>
 
-  <button onclick="saveMood('stressed')">Stressed</button>
-  <button onclick="saveMood('bored')">Bored</button>
-  <button onclick="saveMood('excited')">Excited</button>
-</div>
+    <div class="bottom-screen">
+      <p>How do you feel today?</p>
+    </div>
+  </div>
 
-<script>
-function saveMood(mood){
-  localStorage.setItem('mood', mood);
-  window.location.href = 'q1.html';
-}
-</script>
-
+  <script>
+    function chooseMood(mood){
+      localStorage.setItem("mood", mood);
+      window.location.href = "q1.html";
+    }
+  </script>
 </body>
 </html>
