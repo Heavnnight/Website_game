@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Question 7</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .console{
+      width:1300px;
+      left:-440px;
+      top:-20px;
+      z-index:1;
+    }
+
+    .console img{
+      width:100%;
+    }
+
+    .answers{
+      position:absolute;
+      top:185px;
+      left:10px;
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:25px;
+      width:500px;
+      z-index:10;
+    }
+
+    button{
+      font-family: myFont, sans-serif;
+      font-size:38px;
+      padding:12px 10px;
+      border:none;
+      border-radius:18px;
+      cursor:pointer;
+      background: linear-gradient(45deg, #ffb0d9, #ffffff);
+      color:white;
+      box-shadow:0 0 15px rgba(255, 105, 180, 0.6);
+      transition:0.2s;
+      line-height:1.2;
+    }
+
+    button:hover{
+      transform:scale(1.06);
+      box-shadow:0 0 25px rgba(255, 105, 180, 0.9);
+    }
+
+    .question{
+      position:absolute;
+      top:535px;
+      left:70px;
+      width:450px;
+      color:white;
+      font-size:50px;
+      z-index:10;
+      line-height:1.2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <div class="speech-bubble">
+      <span id="typeText"></span><span class="cursor">|</span>
+    </div>
+
+    <div class="console">
+      <img src="3ds.png" alt="3DS">
+    </div>
+
+    <img src="sweetheart.gif" class="character" alt="Sweetheart">
+
+    <div class="answers">
+      <button onclick="nextAnswer('comfortable')">Keep it comfortable</button>
+      <button onclick="nextAnswer('surprise')">Surprise me</button>
+    </div>
+
+    <div class="question">
+      How much unpredictability can you handle?
+    </div>
+
+  </div>
+
+  <script>
+    function nextAnswer(answer){
+      localStorage.setItem("q6", answer);
+      window.location.href = "q8.html";
+    }
+
+    const message = "Oh? now it's getting interesting i got you";
+    const target = document.getElementById("typeText");
+    let i = 0;
+
+    function typeWriter(){
+      if(i < message.length){
+        target.innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+      }
+    }
+
+    typeWriter();
+  </script>
+</body>
+</html>

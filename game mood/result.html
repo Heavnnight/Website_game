@@ -2,148 +2,254 @@
 <html>
 <head>
   <title>Result</title>
+  <link rel="stylesheet" href="style.css">
 
   <style>
-    @font-face {
-      font-family: myFont;
-      src: url("font.ttf");
-    }
-
-    body{
-      margin:0;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-      background:black;
-      font-family: myFont, sans-serif;
-    }
-
     .console{
-      position:relative;
-      width:1100px;
+      width:1300px;
+      left:-440px;
+      top:-20px;
+      z-index:1;
     }
 
-    .bg{
+    .console img{
       width:100%;
-      display:block;
     }
 
-    .top-screen{
+    .character{
+      top:180px;
+    }
+
+    .game-text{
       position:absolute;
-      top:16%;
-      left:28%;
-      width:44%;
-      height:12%;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      color:white;
-      font-size:28px;
-    }
-
-    .bottom-screen{
-      position:absolute;
-      top:54%;
-      left:30%;
-      width:40%;
-      height:20%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      color:white;
-      gap:16px;
-      padding:10px;
-      box-sizing:border-box;
-    }
-
-    #gameName{
-      font-size:30px;
-    }
-
-    #gameText{
-      font-size:16px;
+      top:110px;
+      left:50px;
+      width:420px;
+      color:rgb(255, 65, 144);
+      font-size:43px;
+      z-index:10;
       line-height:1.5;
-      max-width:320px;
     }
 
-    p{
-      margin:0;
+    .result{
+      position:absolute;
+      top:580px;
+      left:65px;
+      width:420px;
+      color:white;
+      font-size:50px;
+      z-index:10;
+      line-height:1.2;
+      text-shadow:0 0 12px rgba(255, 105, 180, 0.8);
+      white-space:pre-line;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="console">
-    <img src="3ds.png" class="bg">
+  <div class="layout">
 
-    <div class="top-screen">
-      <p>My recommendation for you</p>
+    <div class="speech-bubble">
+      <span id="bubbleText"></span><span class="cursor">|</span>
     </div>
 
-    <div class="bottom-screen">
-      <div id="gameName"></div>
-      <div id="gameText"></div>
+    <div class="console">
+      <img src="3ds.png" alt="3DS">
     </div>
+
+    <img src="sweetheart.gif" class="character" alt="Sweetheart">
+
+    <div class="game-text" id="gameText"></div>
+    <div class="result" id="resultText"></div>
+
   </div>
 
   <script>
-    let mood = localStorage.getItem("mood");
-    let q1 = localStorage.getItem("q1"); // fast / slow
-    let q2 = localStorage.getItem("q2"); // story / action
-    let q3 = localStorage.getItem("q3"); // alone / with-others
-    let q4 = localStorage.getItem("q4"); // yes / no
+    const mood = (localStorage.getItem("mood") || "").toLowerCase();
+    const q1 = (localStorage.getItem("q1") || "").toLowerCase();
+    const q2 = (localStorage.getItem("q2") || "").toLowerCase();
+    const q3 = (localStorage.getItem("q3") || "").toLowerCase();
+    const q4 = (localStorage.getItem("q4") || "").toLowerCase();
+    const q6 = (localStorage.getItem("q6") || "").toLowerCase();
+    const q7 = (localStorage.getItem("q7") || "").toLowerCase();
+    const q8 = (localStorage.getItem("q8") || "").toLowerCase();
 
-    let gameName = "";
-    let gameText = "";
+    const games = {
+      "Silent Hill 2": {
+        score: 0,
+        text: "you seem ready for something emotional, and unsettling this one fits that mood really well"
+      },
+      "Stardew Valley": {
+        score: 0,
+        text: "you seem like you need something gentle and low pressure this is calm familiar and easy to stay with"
+      },
+      "Mario Kart": {
+        score: 0,
+        text: "this is a good match if you want something energetic social, and easy to jump into."
+      },
+      "Life is Strange": {
+        score: 0,
+        text: "you seem drawn to emotional and story driven experiences,so this is the right choice."
+      },
+      "Cyberpunk 2077": {
+        score: 0,
+        text: "you want something active and intense, so this makes sense for you right now."
+      },
+      "The Legend of Zelda": {
+        score: 0,
+        text: "you seem to want something immersive and rewarding that you can stay with for a while"
+      },
+      "Deltarune": {
+        score: 0,
+        text: "this fits if you want something familiar feeling but still interesting playful and story rich."
+      },
+      "Fran Bow": {
+        score: 0,
+        text: "you seem open to something different and strange, so this is a strong match."
+      },
+      "Overcooked": {
+        score: 0,
+        text: "if you want something lively and social without overthinking too much this works really well"
+      }
+    };
 
-    if (mood === "stressed" && q1 === "slow" && q2 === "story") {
-      gameName = "Spiritfarer";
-      gameText = "A calm emotional game. I like it because it feels soft and comforting when I want something slow.";
-    }
-    else if (mood === "stressed" && q1 === "fast" && q2 === "action") {
-      gameName = "Hades";
-      gameText = "Fast, stylish, and energetic. I like it when I want movement and action without feeling bored.";
-    }
-    else if (mood === "sad" && q2 === "story") {
-      gameName = "Life is Strange";
-      gameText = "A story-driven game about emotions and choices. I like it because it feels personal and emotional.";
-    }
-    else if (mood === "angry" && q1 === "fast") {
-      gameName = "DOOM";
-      gameText = "A fast and intense shooter. I like it when I want something aggressive and energetic.";
-    }
-    else if (mood === "happy" && q3 === "with-others") {
-      gameName = "Mario Kart";
-      gameText = "A fun chaotic racing game. I like it because it feels playful and easy to enjoy with other people.";
-    }
-    else if (mood === "happy" && q3 === "alone") {
-      gameName = "A Short Hike";
-      gameText = "A light and relaxing adventure. I like it because it feels cozy and easy to get into.";
-    }
-    else if (mood === "neutral" && q2 === "story") {
-      gameName = "Night in the Woods";
-      gameText = "A narrative game with a strong mood and characters. I like it when I want story and atmosphere.";
-    }
-    else if (q4 === "yes" && q2 === "action") {
-      gameName = "Hollow Knight";
-      gameText = "A challenging action game. I like it because it feels rewarding and immersive.";
-    }
-    else if (q3 === "with-others") {
-      gameName = "Overwatch 2";
-      gameText = "A multiplayer action game. I like it when I want something active with other people.";
-    }
-    else {
-      gameName = "Stardew Valley";
-      gameText = "A relaxing farming game. I like it because it feels calm, repetitive, and comforting.";
+    function addPoints(gameName, points) {
+      games[gameName].score += points;
     }
 
-    document.getElementById("gameName").innerText = gameName;
-    document.getElementById("gameText").innerText = gameText;
+    if (mood === "stressed") {
+      addPoints("Stardew Valley", 3);
+      addPoints("Deltarune", 1);
+    }
+    if (mood === "sad") {
+      addPoints("Life is Strange", 3);
+      addPoints("Silent Hill 2", 1);
+    }
+    if (mood === "happy") {
+      addPoints("Mario Kart", 3);
+      addPoints("Overcooked", 2);
+    }
+    if (mood === "angry") {
+      addPoints("Cyberpunk 2077", 3);
+      addPoints("Silent Hill 2", 1);
+    }
+    if (mood === "neutral") {
+      addPoints("The Legend of Zelda", 2);
+      addPoints("Deltarune", 2);
+    }
+
+    if (q1 === "emotional") {
+      addPoints("Life is Strange", 3);
+      addPoints("Silent Hill 2", 2);
+    }
+    if (q1 === "stimulating") {
+      addPoints("Mario Kart", 2);
+      addPoints("Cyberpunk 2077", 2);
+      addPoints("The Legend of Zelda", 1);
+    }
+    if (q1 === "action") {
+      addPoints("Cyberpunk 2077", 3);
+      addPoints("Mario Kart", 1);
+    }
+    if (q1 === "horror") {
+      addPoints("Silent Hill 2", 4);
+      addPoints("Fran Bow", 2);
+    }
+
+    if (q2 === "low focus") {
+      addPoints("Stardew Valley", 3);
+      addPoints("Mario Kart", 1);
+    }
+    if (q2 === "high focus") {
+      addPoints("Cyberpunk 2077", 2);
+      addPoints("Silent Hill 2", 2);
+      addPoints("The Legend of Zelda", 1);
+    }
+
+    if (q3 === "short time") {
+      addPoints("Mario Kart", 2);
+      addPoints("Overcooked", 2);
+    }
+    if (q3 === "long time") {
+      addPoints("The Legend of Zelda", 3);
+      addPoints("Stardew Valley", 2);
+      addPoints("Cyberpunk 2077", 1);
+    }
+
+    if (q4 === "alone") {
+      addPoints("Silent Hill 2", 1);
+      addPoints("Life is Strange", 2);
+      addPoints("Stardew Valley", 2);
+      addPoints("Fran Bow", 2);
+      addPoints("The Legend of Zelda", 1);
+    }
+    if (q4 === "friends") {
+      addPoints("Mario Kart", 4);
+      addPoints("Overcooked", 4);
+    }
+
+    if (q6 === "immersive") {
+      addPoints("Life is Strange", 2);
+      addPoints("Silent Hill 2", 2);
+      addPoints("The Legend of Zelda", 3);
+    }
+    if (q6 === "direct") {
+      addPoints("Mario Kart", 2);
+      addPoints("Cyberpunk 2077", 2);
+      addPoints("Overcooked", 2);
+    }
+
+    if (q7 === "comfortable") {
+      addPoints("Stardew Valley", 3);
+      addPoints("Deltarune", 2);
+      addPoints("The Legend of Zelda", 1);
+    }
+    if (q7 === "surprise") {
+      addPoints("Silent Hill 2", 3);
+      addPoints("Fran Bow", 3);
+      addPoints("Cyberpunk 2077", 1);
+    }
+
+    if (q8 === "familiar") {
+      addPoints("Stardew Valley", 2);
+      addPoints("Mario Kart", 2);
+      addPoints("The Legend of Zelda", 2);
+    }
+    if (q8 === "different") {
+      addPoints("Fran Bow", 3);
+      addPoints("Silent Hill 2", 1);
+      addPoints("Deltarune", 1);
+    }
+
+    let bestGame = "";
+    let bestScore = -1;
+
+    for (const game in games) {
+      if (games[game].score > bestScore) {
+        bestScore = games[game].score;
+        bestGame = game;
+      }
+    }
+
+    document.getElementById("gameText").innerText = games[bestGame].text;
+    document.getElementById("resultText").innerText =
+      "Sweetheart recommends...\n" + bestGame;
+
+    const bubble = "this is the right choice for your mood right now. enjoy it... and if you don't like it, that's your problem.";
+
+    const target = document.getElementById("bubbleText");
+    let i = 0;
+
+    function typeWriter(){
+      if(i < bubble.length){
+        target.innerHTML += bubble.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+      }
+    }
+
+    typeWriter();
   </script>
 
 </body>

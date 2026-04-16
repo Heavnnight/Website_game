@@ -1,35 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Game Mood Matcher</title>
+  <title>Start</title>
+  <link rel="stylesheet" href="style.css">
 
   <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial;
-      text-align: center;
+    .console{
+      width:1300px;
+      left:-440px;
+      top:-20px;
+      z-index:1;
     }
-    button {
-      padding: 10px 20px;
-      margin-top: 20px;
+
+    .console img{
+      width:100%;
+    }
+
+    .character{
+      left:700px;
+      top:200px;
+      width:1000px;
+      z-index:1;
+      animation: floatChar 4s ease-in-out infinite;
+    }
+
+    .speech-bubble{
+      top:30px;
+      right:120px;
+    }
+
+    .title{
+      position:absolute;
+      top:150px;
+      left:60px;
+      color:rgb(255, 97, 160);
+      font-size:70px;
+      z-index:10;
+      line-height:1.2;
+    }
+
+    .start-btn{
+      position:absolute;
+      top:580px;
+      left:160px;
+      z-index:10;
+      font-family: myFont, sans-serif;
+      font-size:48px;
+      padding:16px 42px;
+      border:none;
+      border-radius:18px;
+      cursor:pointer;
+      background: linear-gradient(45deg, #ff9dd0, #ffffff);
+      color:white;
+      box-shadow:0 0 15px rgba(237, 102, 169, 0.6);
+      transition:0.2s;
+    }
+
+    .start-btn:hover{
+      transform:scale(1.1);
+      box-shadow:0 0 25px rgba(255, 105, 180, 0.9);
     }
   </style>
-
 </head>
+
 <body>
+  <div class="layout">
 
-<div>
-  <h1>Game Mood Matcher</h1>
-  <p>Find a game based on your mood</p>
+    <div class="speech-bubble">
+      <span id="typeText"></span><span class="cursor">|</span>
+    </div>
 
-  <a href="mood.html">
-    <button>Start</button>
-  </a>
-</div>
+    <div class="title">
+      Sweetheart's<br>
+      Game Recommender
+    </div>
 
+    <div class="console">
+      <img src="3ds.png" alt="3DS">
+    </div>
+
+    <img src="sweetheart.gif" class="character" alt="Sweetheart">
+
+    <button class="start-btn" onclick="startGame()">
+      Start
+    </button>
+
+  </div>
+
+  <script>
+    function startGame(){
+      window.location.href = "mood.html";
+    }
+
+    const message = "Hi I’m Sweetheart ♡\nI’ll help you pick the perfect game OHOHOHHO";
+    const target = document.getElementById("typeText");
+
+    let i = 0;
+
+    function typeWriter(){
+      if(i < message.length){
+        if(message.charAt(i) === "\n"){
+          target.innerHTML += "<br>";
+        } else {
+          target.innerHTML += message.charAt(i);
+        }
+        i++;
+        setTimeout(typeWriter, 40);
+      }
+    }
+
+    typeWriter();
+  </script>
 </body>
 </html>

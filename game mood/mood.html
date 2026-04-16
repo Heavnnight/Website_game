@@ -1,63 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Choose Mood</title>
+  <title>Mood</title>
+  <link rel="stylesheet" href="style.css">
 
   <style>
-    @font-face {
-      font-family: myFont;
-      src: url("font.ttf");
-    }
-
-    body{
-      margin:0;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-      background:black;
-      font-family: myFont, sans-serif;
-    }
-
     .console{
-      position:relative;
-      width:1100px;
+      width:1300px;
+      left:-440px;
+      top:-20px;
+      z-index:1;
     }
 
-    .bg{
+    .console img{
       width:100%;
-      display:block;
     }
 
-    /* مساحة الشاشة العليا */
-    .top-screen{
-      position:absolute;
-      top:15%;
-      left:25%;
-      width:50%;
-      height:24%;
+    .character{
+      left:700px;
+      top:200px;
     }
 
-    /* مساحة الشاشة السفلى */
-    .bottom-screen{
+    .speech-bubble{
+      top:30px;
+      right:120px;
+    }
+
+    .speech-bubble::after{
+      right:40px;
+    }
+
+    .question{
       position:absolute;
-      top:65%;
-      left:35%;
-      width:40%;
-      height:12%;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
+      top:590px;
+      left:60px;
+      width:400px;
       color:white;
-      font-size:45px;
+      font-size:50px;
+      z-index:10;
+      line-height:1.2;
     }
 
     .mood{
       position:absolute;
-      width:100px;
+      width:140px;
       cursor:pointer;
       transition:0.2s;
+      z-index:10;
     }
 
     .mood:hover{
@@ -65,8 +54,8 @@
     }
 
     .neutral{
-      top:-20px;
-      left:60%;
+      top:65px;
+      left:250px;
       transform:translateX(-50%);
     }
 
@@ -75,46 +64,50 @@
     }
 
     .angry{
-      top:30px;
-      left:140px;
+      top:110px;
+      left:40px;
     }
 
     .sad{
-      top:30px;
-      right:35px;
+      top:110px;
+      left:320px;
     }
 
     .happy{
-      top:135px;
-      left:220px;
+      top:250px;
+      left:110px;
     }
 
     .stressed{
-      top:135px;
-      right:100px;
-    }
-
-    p{
-      margin:0;
+      top:250px;
+      left:260px;
     }
   </style>
 </head>
 
 <body>
-  <div class="console">
-    <img src="3ds.png" class="bg">
+  <div class="layout">
 
-    <div class="top-screen">
-      <img src="Neutral.png" class="mood neutral" onclick="chooseMood('neutral')">
-      <img src="angry.png" class="mood angry" onclick="chooseMood('angry')">
-      <img src="sad.png" class="mood sad" onclick="chooseMood('sad')">
-      <img src="happy.png" class="mood happy" onclick="chooseMood('happy')">
-      <img src="stressed.png" class="mood stressed" onclick="chooseMood('stressed')">
+    <div class="speech-bubble">
+      <span id="typeText"></span><span class="cursor">|</span>
     </div>
 
-    <div class="bottom-screen">
-      <p>How do you feel today?</p>
+    <div class="console">
+      <img src="3ds.png" alt="3DS">
     </div>
+
+    <img src="sweetheart.gif" class="character" alt="Sweetheart">
+
+    <img src="Neutral.png" class="mood neutral" onclick="chooseMood('neutral')">
+    <img src="angry.png" class="mood angry" onclick="chooseMood('angry')">
+    <img src="sad.png" class="mood sad" onclick="chooseMood('sad')">
+    <img src="happy.png" class="mood happy" onclick="chooseMood('happy')">
+    <img src="stressed.png" class="mood stressed" onclick="chooseMood('stressed')">
+
+    <div class="question">
+      How do you feel today?
+    </div>
+
   </div>
 
   <script>
@@ -122,6 +115,20 @@
       localStorage.setItem("mood", mood);
       window.location.href = "q1.html";
     }
+
+    const message = "im listening";
+    const target = document.getElementById("typeText");
+    let i = 0;
+
+    function typeWriter(){
+      if(i < message.length){
+        target.innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+      }
+    }
+
+    typeWriter();
   </script>
 </body>
 </html>
