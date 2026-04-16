@@ -36,7 +36,6 @@ img{
   position:absolute;
 }
 
-/* ✨ الشخصية */
 .character{
   width:1000px;
   left:700px;
@@ -45,7 +44,6 @@ img{
   animation: floatChar 4s ease-in-out infinite;
 }
 
-/* ✨ البوبل فوق الشخصية */
 .speech-bubble{
   max-width:320px;
   background:rgb(239, 245, 255);
@@ -56,7 +54,6 @@ img{
   border-radius:30px;
   z-index:10;
 
-  /* 🔥 هذا المهم */
   top:10px;
   left:760px;
 
